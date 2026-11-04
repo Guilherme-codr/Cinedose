@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+/* "static" faz o Tailwind gerar todas as variáveis, mesmo as que ainda não foram usadas. */
+@theme static {
+  /* Cores do CineDose (viram classes como bg-fundo, text-destaque, border-borda) */
+  --color-fundo: #0f172a;
+  --color-cabecalho: #0d1117;
+  --color-superficie: #1e293b;
+  --color-borda: #334155;
+  --color-borda-suave: #263449;
+  --color-destaque: #f97316;
+  --color-texto: #f1f5f9;
+  --color-texto-suave: #cbd5e1;
+  --color-mudo: #94a3b8;
+  --color-apagado: #64748b;
+  --color-sucesso: #4ade80;
+  --color-perigo: #f87171;
+
+  --radius-cartao: 14px;
+  --shadow-cartao: 0 4px 14px rgb(0 0 0 / 0.3);
+  --shadow-cartao-destaque: 0 12px 28px rgb(249 115 22 / 0.2);
+
+  /* "backwards": aplica o estado inicial durante o atraso e depois libera o card para o hover */
+  --animate-aparecer: aparecer 0.5s ease backwards;
+  --animate-brilho: brilho 1.4s linear infinite;
+
+  @keyframes aparecer {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes brilho {
+    from {
+      background-position: 200% 0;
+    }
+    to {
+      background-position: -200% 0;
+    }
+  }
+}
+
+@layer base {
+  body {
+    background-color: var(--color-fundo);
+    color: var(--color-texto);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  button:not(:disabled) {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-destaque);
+    outline-offset: 2px;
+  }
+
+  /* Trava a rolagem da página enquanto uma janela está aberta */
+  body:has(dialog[open]) {
+    overflow: hidden;
+  }
+}
+
+@utility sem-barra-de-rolagem {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
