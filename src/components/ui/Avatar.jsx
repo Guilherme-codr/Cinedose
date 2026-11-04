@@ -9,13 +9,18 @@ export function IconeAvatar({ className = "", style }) {
 }
 
 // Avatar grande, em círculo, com a cor escolhida pela pessoa.
-export default function Avatar({ cor }) {
+// Mostra a foto quando existe; senão, o boneco em branco.
+export default function Avatar({ cor, foto }) {
   return (
     <div
       className="flex size-21 shrink-0 items-end justify-center overflow-hidden rounded-full border-2 bg-cabecalho transition-colors"
       style={{ color: cor, borderColor: cor }}
     >
-      <IconeAvatar className="size-[76%]" />
+      {foto ? (
+        <img src={foto} alt="Foto de perfil" className="size-full object-cover" />
+      ) : (
+        <IconeAvatar className="size-[76%]" />
+      )}
     </div>
   );
 }

@@ -46,7 +46,15 @@ export default function Header({ paginaAtual, aoNavegar, aoBuscar, aoAbrirConta 
 
         <div className="flex justify-end gap-3.5">
           <Botao variante="menu" onClick={aoAbrirConta}>
-            <IconeAvatar className="size-[22px] shrink-0" style={{ color: corDoAvatar }} />
+            {perfil.foto ? (
+              <img
+                src={perfil.foto}
+                alt=""
+                className="size-[22px] shrink-0 rounded-full object-cover"
+              />
+            ) : (
+              <IconeAvatar className="size-[22px] shrink-0" style={{ color: corDoAvatar }} />
+            )}
             <span className="max-w-[140px] truncate">{perfil.nome || "Minha conta"}</span>
           </Botao>
 

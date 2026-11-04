@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CATEGORIAS } from "../../data/filmes";
 import { useLista } from "../../hooks/useLista";
 import { usePerfil } from "../../hooks/usePerfil";
-import { baixarJson } from "../../utils/arquivo";
+import { baixarJson, reduzirImagem } from "../../utils/arquivo";
 import Avatar from "../ui/Avatar";
 import Botao from "../ui/Botao";
 import CampoTexto from "../ui/CampoTexto";
@@ -28,6 +28,9 @@ export default function FormularioConta({ aoSalvar, aoFechar }) {
     generos: perfil.generos.filter((genero) => Object.hasOwn(CATEGORIAS, genero)),
   }));
 
+  const entradaFoto = useRef(null);
+  const [erroFoto, setErroFoto] = useState("");
+
   const atualizar = (campo, valor) => setRascunho((atual) => ({ ...atual, [campo]: valor }));
 
   const alternarGenero = (genero) =>
@@ -38,6 +41,23 @@ export default function FormularioConta({ aoSalvar, aoFechar }) {
         : [...atual.generos, genero],
     }));
 
+  async function escolherFoto(evento) {
+    const arquivo = evento.target.files?.[0];
+    evento.target.value = ""; // permite escolher o mesmo arquivo de novo
+    if (!arquivo) return;
+
+    if (!arquivo.type.startsWith("image/")) {
+      setErroFoto("Escolha um arquivo de imagem.");
+      return;
+    }
+    try {
+      atualizar("foto", await reduzirImagem(arquivo));
+      setErroFoto("");
+    } catch {
+      setErroFoto("Não foi possível carregar essa imagem.");
+    }
+  }
+
   function enviar(evento) {
     evento.preventDefault();
     salvar({
@@ -46,6 +66,7 @@ export default function FormularioConta({ aoSalvar, aoFechar }) {
       filmeFavorito: rascunho.filmeFavorito.trim(),
       generos: rascunho.generos,
       cor: rascunho.cor,
+      foto: rascunho.foto,
       mostrarSinopse: rascunho.mostrarSinopse,
     });
     aoSalvar();
@@ -69,10 +90,32 @@ export default function FormularioConta({ aoSalvar, aoFechar }) {
       <h2 className="mb-5 pr-10 text-2xl font-bold">Minha conta</h2>
 
       <div className="mb-5.5 flex items-center gap-5">
-        <Avatar cor={rascunho.cor} />
+        <Avatar cor={rascunho.cor} foto={rascunho.foto} />
         <div>
           <span className="block text-sm font-bold text-texto-suave">Cor do avatar</span>
           <SeletorCores cor={rascunho.cor} aoEscolher={(cor) => atualizar("cor", cor)} />
+
+          <div className="mt-3 flex flex-wrap gap-2">
+            <input
+              ref={entradaFoto}
+              type="file"
+              accept="image/*"
+              onChange={escolherFoto}
+              className="hidden"
+            />
+            <Botao className="text-sm" onClick={() => entradaFoto.current?.click()}>
+              {rascunho.foto ? "Mudar foto" : "Adicionar foto"}
+            </Botao>
+            {rascunho.foto && (
+              <Botao
+                className="text-sm hover:border-perigo! hover:text-perigo!"
+                onClick={() => atualizar("foto", null)}
+              >
+                Remover foto
+              </Botao>
+            )}
+          </div>
+          {erroFoto && <p className="mt-1.5 text-xs text-perigo">{erroFoto}</p>}
         </div>
       </div>
 

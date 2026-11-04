@@ -8,6 +8,7 @@ export const PERFIL_PADRAO = {
   filmeFavorito: "",
   generos: [],
   cor: COR_PADRAO,
+  foto: null,
   mostrarSinopse: true,
   criadoEm: null,
 };
