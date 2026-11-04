@@ -62,3 +62,13 @@ Configuração (uma vez só, no GitHub):
 
 > As variáveis `VITE_*` são embutidas no JavaScript final, então qualquer pessoa pode vê-las
 > no navegador. Use chaves gratuitas/de leitura e, se possível, restrinja o domínio no painel da API.
+
+### Enviar alterações com um comando
+
+```bash
+npm run deploy                          # pergunta a mensagem do commit
+npm run deploy -- "mensagem do commit"  # ou já informa direto
+```
+
+O comando confere o lint e o build, faz o commit de tudo, envia para o GitHub e o deploy começa
+automaticamente. Se algo falhar, nada é enviado.
