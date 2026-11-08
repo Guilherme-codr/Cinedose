@@ -41,6 +41,12 @@ src/
 └── pages/              Início, Explorar, Lançamentos, Melhores Avaliados, Minha Lista, Resultados
 ```
 
+## Celular
+
+O layout se adapta com um único breakpoint do Tailwind, `sm` (640px): a classe sem prefixo vale para o
+celular e `sm:` para telas maiores. Siga o mesmo padrão em componentes novos. O motivo e as alternativas
+estão em [docs/decisions/ADR-001](docs/decisions/ADR-001-layout-responsivo-mobile-first.md).
+
 ## Como personalizar
 
 - **Filmes de cada seção:** edite `src/data/filmes.js` (use o ID `tt...` do IMDb).
