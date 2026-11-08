@@ -89,9 +89,9 @@ export default function FormularioConta({ aoSalvar, aoFechar }) {
     <form onSubmit={enviar}>
       <h2 className="mb-5 pr-10 text-2xl font-bold">Minha conta</h2>
 
-      <div className="mb-5.5 flex items-center gap-5">
+      <div className="mb-5.5 flex items-center gap-4 sm:gap-5">
         <Avatar cor={rascunho.cor} foto={rascunho.foto} />
-        <div>
+        <div className="min-w-0">
           <span className="block text-sm font-bold text-texto-suave">Cor do avatar</span>
           <SeletorCores cor={rascunho.cor} aoEscolher={(cor) => atualizar("cor", cor)} />
 

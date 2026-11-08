@@ -2,7 +2,7 @@ import { CORES_AVATAR } from "../../data/perfil";
 
 export default function SeletorCores({ cor, aoEscolher }) {
   return (
-    <div role="radiogroup" aria-label="Cor do avatar" className="mt-2 flex gap-2.5">
+    <div role="radiogroup" aria-label="Cor do avatar" className="mt-2 flex flex-wrap gap-2.5">
       {CORES_AVATAR.map((opcao) => {
         const escolhida = opcao === cor;
 

@@ -32,7 +32,7 @@ export default function Modal({ aberto, aoFechar, rotulo, largura = "max-w-[560p
       >
         ×
       </button>
-      <div className="max-h-[90vh] overflow-y-auto p-6">{aberto && children}</div>
+      <div className="max-h-[90dvh] overflow-y-auto p-4 sm:p-6">{aberto && children}</div>
     </dialog>
   );
 }

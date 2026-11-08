@@ -2,7 +2,7 @@ import Mensagem from "../ui/Mensagem";
 import CardFilme from "./CardFilme";
 import CardSkeleton from "./CardSkeleton";
 
-const CLASSES_DA_GRADE = "grid grid-cols-[repeat(auto-fill,minmax(210px,1fr))] gap-7";
+const CLASSES_DA_GRADE = "grid grid-cols-[repeat(auto-fill,minmax(130px,1fr))] gap-4 sm:grid-cols-[repeat(auto-fill,minmax(210px,1fr))] sm:gap-7";
 
 // Mostra os filmes em grade, com efeito de carregamento, mensagem de erro e estado vazio.
 export default function GradeFilmes({

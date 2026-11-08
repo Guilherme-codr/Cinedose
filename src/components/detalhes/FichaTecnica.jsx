@@ -18,7 +18,7 @@ export default function FichaTecnica({ filme, extras }) {
   ].filter(([, valor]) => valor);
 
   return (
-    <dl className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3">
+    <dl className="grid grid-cols-[repeat(auto-fit,minmax(min(220px,100%),1fr))] gap-3">
       {linhas.map(([rotulo, valor]) => (
         <div key={rotulo} className="rounded-[10px] border border-borda-suave bg-fundo px-3.5 py-2.5">
           <dt className="mb-0.5 text-[0.78rem] text-mudo">{rotulo}</dt>

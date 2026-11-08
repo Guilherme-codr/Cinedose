@@ -16,15 +16,15 @@ export default function Header({ paginaAtual, aoNavegar, aoBuscar, aoAbrirConta 
   return (
     <header className="bg-cabecalho">
       {/* Três colunas: as das pontas têm o mesmo tamanho, então a busca fica no centro exato. */}
-      <div className="grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-4 px-5 py-4 min-[1100px]:grid-cols-[1fr_minmax(260px,480px)_1fr]">
-        <div className="flex flex-wrap items-center gap-x-10 gap-y-2">
-          <h1 className="text-[2rem] leading-tight font-bold">
+      <div className="grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-3 px-5 py-4 sm:gap-x-6 sm:gap-y-4 min-[1100px]:grid-cols-[1fr_minmax(260px,480px)_1fr]">
+        <div className="max-sm:contents sm:flex sm:flex-wrap sm:items-center sm:gap-x-10 sm:gap-y-2">
+          <h1 className="text-2xl leading-tight font-bold sm:text-[2rem]">
             <button type="button" onClick={() => aoNavegar(PAGINAS.INICIO)}>
               Cine<span className="text-destaque">Dose</span>
             </button>
           </h1>
 
-          <nav aria-label="Principal" className="flex flex-wrap items-center gap-3.5">
+          <nav aria-label="Principal" className="sem-barra-de-rolagem flex items-center gap-1 overflow-x-auto whitespace-nowrap max-sm:order-2 max-sm:col-span-full max-sm:-mx-5 max-sm:px-4 sm:flex-wrap sm:gap-3.5">
             {MENU.map((item) => (
               <Botao
                 key={item.id}
@@ -44,7 +44,7 @@ export default function Header({ paginaAtual, aoNavegar, aoBuscar, aoAbrirConta 
           className="order-3 col-span-full min-[1100px]:order-none min-[1100px]:col-span-1"
         />
 
-        <div className="flex justify-end gap-3.5">
+        <div className="flex justify-end gap-1 sm:gap-3.5">
           <Botao variante="menu" onClick={aoAbrirConta}>
             {perfil.foto ? (
               <img
@@ -55,7 +55,7 @@ export default function Header({ paginaAtual, aoNavegar, aoBuscar, aoAbrirConta 
             ) : (
               <IconeAvatar className="size-[22px] shrink-0" style={{ color: corDoAvatar }} />
             )}
-            <span className="max-w-[140px] truncate">{perfil.nome || "Minha conta"}</span>
+            <span className="max-w-[140px] truncate max-sm:sr-only">{perfil.nome || "Minha conta"}</span>
           </Botao>
 
           <Botao

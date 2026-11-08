@@ -46,9 +46,9 @@ export default function CardFilme({ filme, indice = 0, className = "" }) {
           )}
         </span>
 
-        <span className="block p-3.5">
-          <span className="mb-1 block truncate text-base font-bold">{filme.titulo}</span>
-          <span className="mb-2.5 block text-[0.85rem] text-mudo">
+        <span className="block p-2.5 sm:p-3.5">
+          <span className="mb-1 block truncate text-sm font-bold sm:text-base">{filme.titulo}</span>
+          <span className="mb-2.5 block text-xs text-mudo sm:text-[0.85rem]">
             {[filme.ano, filme.duracao].filter(Boolean).join(" • ")}
           </span>
           <span className="flex flex-wrap gap-1.5">

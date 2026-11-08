@@ -9,7 +9,7 @@ export default function CardSkeleton({ className = "" }) {
       className={`overflow-hidden rounded-cartao border border-borda-suave bg-superficie shadow-cartao ${className}`}
     >
       <div className={`aspect-[2/3] ${BRILHO}`} />
-      <div className="p-3.5">
+      <div className="p-2.5 sm:p-3.5">
         <div className={`mb-2 h-3.5 rounded-md ${BRILHO}`} />
         <div className={`h-3.5 w-3/5 rounded-md ${BRILHO}`} />
       </div>

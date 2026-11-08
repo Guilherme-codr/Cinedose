@@ -6,7 +6,7 @@ import CardSkeleton from "./CardSkeleton";
 const LARGURA_DO_CARD = 210;
 const ESPACO_ENTRE_CARDS = 24;
 const CARDS_POR_CLIQUE = 3;
-const CLASSES_DO_CARD = "w-[210px] shrink-0 snap-start";
+const CLASSES_DO_CARD = "w-[150px] shrink-0 snap-start sm:w-[210px]";
 
 function SetaCarrossel({ lado, aoClicar }) {
   const posicao = lado === "esquerda" ? "left-1.5" : "right-1.5";
@@ -42,7 +42,7 @@ export default function Carrossel({ filmes, carregando, erro }) {
 
       <div
         ref={trilhoRef}
-        className="sem-barra-de-rolagem flex snap-x snap-mandatory gap-6 overflow-x-auto px-1 pt-3 pb-5"
+        className="sem-barra-de-rolagem flex snap-x snap-mandatory gap-4 overflow-x-auto sm:gap-6 px-1 pt-3 pb-5"
       >
         {carregando
           ? Array.from({ length: 6 }, (_, indice) => (

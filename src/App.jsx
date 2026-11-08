@@ -34,7 +34,7 @@ export default function App() {
         aoAbrirConta={() => setContaAberta(true)}
       />
 
-      <main className="mx-auto w-full max-w-325 flex-1 px-5 py-10">
+      <main className="mx-auto w-full max-w-325 flex-1 px-4 py-6 sm:px-5 sm:py-10">
         {pagina === PAGINAS.INICIO && <Inicio />}
         {pagina === PAGINAS.EXPLORAR && <Explorar />}
         {pagina === PAGINAS.LANCAMENTOS && <Lancamentos />}

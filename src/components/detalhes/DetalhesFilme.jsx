@@ -29,14 +29,14 @@ export default function DetalhesFilme({ filme }) {
   return (
     <article>
       <div className="flex flex-col items-center gap-6 sm:flex-row sm:items-start">
-        <div className="aspect-[2/3] w-[210px] shrink-0 overflow-hidden rounded-xl bg-cabecalho">
+        <div className="aspect-[2/3] w-[160px] shrink-0 sm:w-[210px] overflow-hidden rounded-xl bg-cabecalho">
           {filme.poster && (
             <img src={filme.poster} alt={`Pôster de ${filme.titulo}`} className="h-full w-full object-cover" />
           )}
         </div>
 
         <div className="w-full">
-          <h2 className="pr-10 text-[1.7rem] leading-tight font-bold">{filme.titulo}</h2>
+          <h2 className="pr-10 text-2xl leading-tight sm:text-[1.7rem] font-bold">{filme.titulo}</h2>
           {filme.tituloOriginal !== filme.titulo && (
             <p className="mt-1 text-sm text-mudo italic">{filme.tituloOriginal}</p>
           )}
