@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { CATEGORIAS } from "../../data/filmes";
 import { useLista } from "../../hooks/useLista";
 import { usePerfil } from "../../hooks/usePerfil";
+import { useSessao } from "../../hooks/useSessao";
 import { baixarJson, reduzirImagem } from "../../utils/arquivo";
 import Avatar from "../ui/Avatar";
 import Botao from "../ui/Botao";
@@ -22,6 +23,8 @@ function Resumo({ valor, rotulo }) {
 export default function FormularioConta({ aoSalvar, aoFechar }) {
   const { perfil, salvar, redefinir } = usePerfil();
   const { ids, total, limpar: limparLista } = useLista();
+  const { usuario, sair, apagarConta } = useSessao();
+  const [erroConta, setErroConta] = useState("");
 
   const [rascunho, setRascunho] = useState(() => ({
     ...perfil,
@@ -76,9 +79,19 @@ export default function FormularioConta({ aoSalvar, aoFechar }) {
     baixarJson("cinedose-meus-dados.json", { perfil, lista: ids });
   }
 
-  function apagarDados() {
-    if (!window.confirm("Isso apaga o seu perfil e a sua lista neste navegador. Deseja continuar?")) {
-      return;
+  async function apagarDados() {
+    const pergunta = usuario
+      ? `Isso apaga para sempre a conta ${usuario.email}, o seu perfil e a sua lista. Deseja continuar?`
+      : "Isso apaga o seu perfil e a sua lista neste navegador. Deseja continuar?";
+    if (!window.confirm(pergunta)) return;
+
+    if (usuario) {
+      try {
+        await apagarConta();
+      } catch (falha) {
+        setErroConta(falha.message);
+        return;
+      }
     }
     redefinir();
     limparLista();
@@ -88,6 +101,14 @@ export default function FormularioConta({ aoSalvar, aoFechar }) {
   return (
     <form onSubmit={enviar}>
       <h2 className="mb-5 pr-10 text-2xl font-bold">Minha conta</h2>
+      {usuario && (
+        <p className="-mt-3 mb-5 flex flex-wrap items-center gap-x-3 text-sm text-mudo">
+          <span className="min-w-0 truncate">{usuario.email}</span>
+          <Botao variante="texto" onClick={sair}>
+            Sair
+          </Botao>
+        </p>
+      )}
 
       <div className="mb-5.5 flex items-center gap-4 sm:gap-5">
         <Avatar cor={rascunho.cor} foto={rascunho.foto} />
@@ -189,9 +210,14 @@ export default function FormularioConta({ aoSalvar, aoFechar }) {
           Exportar meus dados
         </Botao>
         <Botao variante="texto" className="hover:text-perigo" onClick={apagarDados}>
-          Apagar meus dados
+          {usuario ? "Apagar minha conta" : "Apagar meus dados"}
         </Botao>
       </div>
+      {erroConta && (
+        <p role="alert" className="mt-3 text-sm text-perigo">
+          {erroConta}
+        </p>
+      )}
     </form>
   );
 }

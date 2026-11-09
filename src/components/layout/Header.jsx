@@ -2,6 +2,7 @@ import { MENU, PAGINAS } from "../../constants/paginas";
 import { COR_PADRAO } from "../../data/perfil";
 import { useLista } from "../../hooks/useLista";
 import { usePerfil } from "../../hooks/usePerfil";
+import { useSessao } from "../../hooks/useSessao";
 import Botao from "../ui/Botao";
 import { IconeAvatar } from "../ui/Avatar";
 import FormBusca from "../ui/FormBusca";
@@ -9,6 +10,8 @@ import FormBusca from "../ui/FormBusca";
 export default function Header({ paginaAtual, aoNavegar, aoBuscar, aoAbrirConta }) {
   const { total } = useLista();
   const { perfil } = usePerfil();
+  const { ativo, usuario } = useSessao();
+  const rotuloConta = ativo && !usuario ? "Entrar" : perfil.nome || "Minha conta";
 
   // Só pinta o boneco quando a pessoa escolheu uma cor; senão ele acompanha o texto do botão.
   const corDoAvatar = perfil.cor !== COR_PADRAO ? perfil.cor : undefined;
@@ -55,7 +58,7 @@ export default function Header({ paginaAtual, aoNavegar, aoBuscar, aoAbrirConta 
             ) : (
               <IconeAvatar className="size-[22px] shrink-0" style={{ color: corDoAvatar }} />
             )}
-            <span className="max-w-[140px] truncate max-sm:sr-only">{perfil.nome || "Minha conta"}</span>
+            <span className="max-w-[140px] truncate max-sm:sr-only">{rotuloConta}</span>
           </Botao>
 
           <Botao

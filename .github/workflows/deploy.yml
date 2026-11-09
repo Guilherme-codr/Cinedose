@@ -33,6 +33,8 @@ jobs:
           BASE_PATH: /${{ github.event.repository.name }}/
           VITE_OMDB_KEY: ${{ secrets.VITE_OMDB_KEY }}
           VITE_TMDB_KEY: ${{ secrets.VITE_TMDB_KEY }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_KEY: ${{ secrets.VITE_SUPABASE_KEY }}
 
       - uses: actions/upload-pages-artifact@v3
         with:
